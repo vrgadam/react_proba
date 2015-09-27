@@ -41,30 +41,42 @@ var Balloon = React.createClass({displayName: "Balloon",
     var BalloonListItem = React.createClass({displayName: "BalloonListItem",
         render: function () {
             return (
-                React.createElement("li", null, " ", React.createElement(Balloon, {id: this.props.id, name: this.props.name, price: this.props.price}), " ")
+                React.createElement("div", {className: "one-third column"}, " ", React.createElement(Balloon, {id: this.props.id, name: this.props.name, price: this.props.price}), " ")
             );
         } 
     });
-    
+    var BalloonRow = React.createClass({displayName: "BalloonRow",
+
+        render: function () {
+            var balloons = [
+                React.createElement(BalloonListItem, {id: this.props.firstId}), 
+                React.createElement(BalloonListItem, {id: this.props.secondId}), 
+                React.createElement(BalloonListItem, {id: this.props.thirdId}) 
+            ];
+
+            return (
+                React.createElement("div", {className: "row"}, balloons)
+            );
+        } 
+    });
+        
     var BalloonList = React.createClass({displayName: "BalloonList",
         getDefaultProps: function() {
             return {
-                numOfBalloons: 20
+                numOfBalloons: 21
             }
         },
         propTypes: {
             numOfBalloons: React.PropTypes.number
         },
         render: function() {
-            var balloons = [];
-            var nextId = Math.floor((Math.random() * 1000) + 1);
-            for (var i = 0; i < this.props.numOfBalloons; i++) {
-                balloons.push(React.createElement(BalloonListItem, {id: nextId}));
-                nextId = Math.floor((Math.random() * 1000) + 1);
+            var balloonRows = [];
+            for (var i = 0; i < this.props.numOfBalloons; i += 3) {
+                balloonRows.push(React.createElement(BalloonRow, {firstId: i, secondId: i + 1, thirdId: i + 2}));
             }
             return (
                 React.createElement("div", {className: "list-container"}, 
-                    React.createElement("ul", null, balloons)
+                    React.createElement("div", null, balloonRows)
                 ) 
             );
         }
@@ -79,6 +91,9 @@ $(document).ready(function () {
     var balloons = require('./balloons.js');
     var texts = require('./texts.js');
     var app = $('#app-container')[0];
+    var glassLayer = $('.glass-layer');
+    var appHeader = $('.app-header');
+    var header = $('.section.header');
     var menu = {
     	balloons: $('.menu-item.balloons')[0],
     	texts: $('.menu-item.text')[0],
@@ -91,6 +106,16 @@ $(document).ready(function () {
 		React.render( React.createElement(texts.Texts, null) , app);    	
     });
 
+    $(document).scroll(function() {
+    	glassLayer.css({ opacity: $(document).scrollTop() / 310 });
+    	    	if ( appHeader.css('background-color') === 'rgba(0, 0, 0, 0)' && $(document).scrollTop() > 310 ) {
+    		appHeader.css({ 'background-color': 'rgb(0, 0, 0)' }).addClass('docked');
+    	}
+    	if ( appHeader.css('background-color') === 'rgb(0, 0, 0)' && $(document).scrollTop() < 310 ) {
+    		appHeader.css({ 'background-color': 'rgba(0, 0, 0, 0)' }).removeClass('docked');
+    	}
+
+    })
     React.render( React.createElement(balloons.BalloonList, {numOfBalloons: CONFIG.app.balloons.number}) , app);
 
 
@@ -104,7 +129,11 @@ var Texts = React.createClass({displayName: "Texts",
         return ( React.createElement("div", {className: "text-container"}, 
         		React.createElement("h1", {className: "text-title"}, "Are hot-air balloons really that good?"), 
 	        	React.createElement("p", null, "The hot air balloon is the oldest successful human-carrying flight technology. The first untethered manned hot air balloon flight was performed by Jean-François Pilâtre de Rozier and François Laurent d Arlandes on November 21, 1783, in Paris, France, in a balloon created by the Montgolfier brothers. Hot air balloons that can be propelled through the air rather than simply drifting the wind are known as thermal airships."), 
-	        	React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu bibendum nibh. Nullam ut ex elit. Integer condimentum, purus eu semper rhoncus, tortor turpis auctor lorem, sollicitudin imperdiet magna felis eget mi. Praesent est turpis, dapibus et justo eget, faucibus hendrerit magna. Donec sed lectus magna. Donec sit amet est vitae ligula scelerisque pellentesque. Phasellus nulla odio, tempus ut pulvinar a, ultricies nec tellus. Quisque facilisis mauris malesuada ante tempus, a efficitur orci pretium.")
+	        	React.createElement("p", null, "Roof party fanny pack seitan heirloom selfies craft beer. Chia tousled tote bag crucifix. Occupy banh mi Odd Future ethical. Echo Park shabby chic mlkshk street art tilde fingerstache, chambray Etsy Pinterest cornhole XOXO. PBR Echo Park DIY occupy street art, YOLO synth crucifix direct trade disrupt beard tattooed. Gastropub twee polaroid trust fund deep v shabby chic kogi. Asymmetrical organic disrupt, actually small batch meditation Blue Bottle raw denim Odd Future typewriter."), 
+	        	React.createElement("p", null, "Blue Bottle banh mi heirloom, kitsch chambray keffiyeh meh Shoreditch try-hard skateboard Etsy Thundercats hella. Raw denim Williamsburg crucifix, sriracha actually heirloom squid +1 Odd Future polaroid. Disrupt DIY ennui, narwhal McSweeney s slow-carb artisan selfies swag bitters Brooklyn vegan. DIY wolf tote bag, mixtape whatever gentrify narwhal mumblecore banjo aesthetic Wes Anderson Banksy letterpress. Asymmetrical authentic meditation Odd Future cred. Trust fund beard chia, tousled bitters bicycle rights mumblecore semiotics pour-over. Mumblecore Pinterest 8-bit, Shoreditch kitsch twee trust fund Austin before they sold out butcher street art."), 
+	        	React.createElement("p", null, "Squid trust fund semiotics, XOXO ugh you probably havent heard of them bicycle rights sartorial. Echo Park pork belly Blue Bottle meggings fixie lo-fi leggings retro squid art party master cleanse. Plaid photo booth Kickstarter cornhole try-hard. Mumblecore photo booth migas, retro 8-bit try-hard Marfa cronut slow-carb beard butcher readymade kale chips YOLO. Occupy lomo post-ironic, church-key health goth kogi typewriter stumptown kale chips. Pug DIY crucifix McSweeneys wolf Thundercats, organic flexitarian Tumblr Portland Pinterest farm-to-table. Viral disrupt hashtag, chambray kitsch butcher ennui ethical 8-bit direct trade Wes Anderson Austin jean shorts."), 
+	        	React.createElement("p", null, "90 s Thundercats roof party retro, skateboard gastropub before they sold out craft beer cold-pressed. American Apparel cronut cliche Portland, raw denim wolf asymmetrical tattooed. Beard sriracha paleo butcher locavore. Selvage drinking vinegar gastropub, skateboard actually fingerstache lo-fi church-key ennui chia. Mixtape irony seitan hoodie. Lumbersexual chillwave cray meh master cleanse XOXO. Fixie forage bitters cred, pug bicycle rights 3 wolf moon semiotics pop-up mixtape sartorial yr cold-pressed pork belly."), 
+	        	React.createElement("p", null)
           ) 
         );
     }

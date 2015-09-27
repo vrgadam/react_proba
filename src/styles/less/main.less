@@ -2,9 +2,10 @@
 @main-div-color: #777;
 @title-text-color: rgba(255, 255, 255, 0.92);
 body {
-    background: #fff;
-    font-family: 'Oswald', sans-serif;
-    box-sizing: border-box;
+    .main {
+        background: #fff;
+        box-sizing: border-box;
+    }
 }
 
 .balloon-container {
@@ -15,7 +16,7 @@ body {
     padding: 15px 20px;
     transition: all .2s ease;
     text-align: center;
-    margin: 20px;
+    margin: 20px auto;
 }
 
 .balloon-img {
@@ -65,32 +66,58 @@ body {
     list-style-type: none;
 }
 
+.section.header {
+    background-image: url("./img/background.jpg");
+    background-size: cover;
+    height: 410px;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.28) inset;
+
+    .glass-layer {
+        background: black;
+        content: "";
+        position: absolute;
+        height: 410px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        transition: .01s opacity;
+    }
+}
+
 .app-header {
     position: fixed;
     top: 0;
     text-align: center;
-    background-color: black;
+    background-color: transparent;
     left: 0;
     width: 100%;
     z-index: 999;
     height: 100px;
     cursor: default;
+    transition: box-shadow .2s ease;
+    &.docked {
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+    }
     .title {
         font-family: 'Poiret One', serif;
         margin-top: 10px;
         font-size: 50px;
+        line-height: initial;
         font-weight: normal;
         text-transform: uppercase;
         color: @title-text-color;
     }
     .menu-wrapper {
         margin: auto;
+        font-family: 'Oswald', sans-serif;
         .menu-item {
             color: @title-text-color;
             position: relative;
             display: inline-block;
             text-align: center;
-            padding: 5px 20px;
+            padding: 2px 20px;
+            padding-bottom: 8px;
             bottom: 2px;
             cursor: pointer;
             transition: all .2s ease;
@@ -106,7 +133,6 @@ body {
                 transition: all .2s ease;
             }
             &:hover {
-                background-color: rgba(0, 0, 0, 0.7);
                 &:after {
                     width: 100%
                 }
@@ -148,11 +174,19 @@ body {
 
 #app-container {
     margin: 0 auto;
-    margin-top: 110px;
+    margin-top: 10px;
+    margin-bottom: 60px;
     padding: 0 20px;
     width: 90%;
 }
 
 .text-container {
-    padding: 20px 40px;
+    padding: 20px;
+    max-width: 1024px;
+    width: 70%;
+    margin: auto;
+    text-align: justify;
+    h1 {
+        font-size: 4rem;
+    }
 }

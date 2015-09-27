@@ -31,30 +31,42 @@ var Balloon = React.createClass({
     var BalloonListItem = React.createClass({
         render: function () {
             return (
-                <li> <Balloon id={this.props.id} name={this.props.name} price={this.props.price}/> </li>
+                <div className="one-third column"> <Balloon id={this.props.id} name={this.props.name} price={this.props.price}/> </div>
             );
         } 
     });
-    
+    var BalloonRow = React.createClass({
+
+        render: function () {
+            var balloons = [
+                React.createElement(BalloonListItem, {id: this.props.firstId}), 
+                React.createElement(BalloonListItem, {id: this.props.secondId}), 
+                React.createElement(BalloonListItem, {id: this.props.thirdId}) 
+            ];
+
+            return (
+                <div className="row">{balloons}</div>
+            );
+        } 
+    });
+        
     var BalloonList = React.createClass({
         getDefaultProps: function() {
             return {
-                numOfBalloons: 20
+                numOfBalloons: 21
             }
         },
         propTypes: {
             numOfBalloons: React.PropTypes.number
         },
         render: function() {
-            var balloons = [];
-            var nextId = Math.floor((Math.random() * 1000) + 1);
-            for (var i = 0; i < this.props.numOfBalloons; i++) {
-                balloons.push(React.createElement(BalloonListItem, {id: nextId}));
-                nextId = Math.floor((Math.random() * 1000) + 1);
+            var balloonRows = [];
+            for (var i = 0; i < this.props.numOfBalloons; i += 3) {
+                balloonRows.push(React.createElement(BalloonRow, {firstId: i, secondId: i + 1, thirdId: i + 2}));
             }
             return (
                 <div className="list-container">
-                    <ul>{balloons}</ul>
+                    <div>{balloonRows}</div>
                 </div> 
             );
         }

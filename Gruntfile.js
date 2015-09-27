@@ -25,7 +25,7 @@ module.exports = function(grunt) {
             },
             less: {
                 files: ['**/*.less'],
-                tasks: ['less']
+                tasks: ['less', 'concat']
             },
             js: {
                 files: ['./src/scripts/**/*.js'],
@@ -53,6 +53,12 @@ module.exports = function(grunt) {
                 }
             }
         },
+        concat: {
+            css: {
+                src: ['./www/reactproba.css', './node_modules/skeleton-css/css/normalize.css', './node_modules/skeleton-css/css/skeleton.css'],
+                dest: './www/reactproba.css'
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-bump');
@@ -60,8 +66,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    grunt.registerTask('serve', ['less', 'browserify', 'connect', 'watch']);
+    grunt.registerTask('serve', ['less', 'concat', 'browserify', 'connect', 'watch']);
 
 
 };
