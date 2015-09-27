@@ -1,0 +1,143 @@
+body {
+  background: #fff;
+  font-family: 'Oswald', sans-serif;
+  box-sizing: border-box;
+}
+.balloon-container {
+  background: inherit;
+  border: 1px solid #777777;
+  width: 150px;
+  height: 260px;
+  padding: 15px 20px;
+  transition: all .2s ease;
+  text-align: center;
+  margin: 20px;
+}
+.balloon-img {
+  height: 158px;
+}
+.balloon-container h1 {
+  font-size: 15px;
+  text-transform: capitalize;
+  color: black;
+  margin: 5px;
+  font-weight: 100;
+}
+.balloon-container h2 {
+  font-size: 13px;
+  text-transform: capitalize;
+  color: black;
+  margin: 3px;
+  font-weight: 100;
+}
+.btn {
+  padding: 6px 25px;
+  text-transform: uppercase;
+  font-size: 14px;
+  background-color: #777777;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  transition: all .2s ease;
+}
+.btn:hover {
+  background-color: black;
+}
+.list-container {
+  width: 90%;
+  margin: auto;
+}
+.list-container li {
+  float: left;
+  list-style-type: none;
+}
+.app-header {
+  position: fixed;
+  top: 0;
+  text-align: center;
+  background-color: black;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  height: 100px;
+  cursor: default;
+}
+.app-header .title {
+  font-family: 'Poiret One', serif;
+  margin-top: 10px;
+  font-size: 50px;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+.app-header .menu-wrapper {
+  margin: auto;
+}
+.app-header .menu-wrapper .menu-item {
+  color: rgba(255, 255, 255, 0.92);
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  padding: 5px 20px;
+  bottom: 2px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.app-header .menu-wrapper .menu-item:after {
+  content: "";
+  display: inline-block;
+  border-top: 2px solid white;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -50%;
+  width: 0%;
+  transition: all .2s ease;
+}
+.app-header .menu-wrapper .menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.app-header .menu-wrapper .menu-item:hover:after {
+  width: 100%;
+}
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #353535;
+  height: 33px;
+}
+.app-footer .footer-item-wrapper {
+  display: table;
+  margin: auto;
+  height: 100%;
+}
+.app-footer .footer-item-wrapper .footer-item {
+  display: table-cell;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 100;
+  font-size: 11px;
+  padding: 0 40px;
+  cursor: default;
+}
+.cta {
+  transition: all .2s ease !important;
+  cursor: pointer !important;
+}
+.cta:hover {
+  color: white !important;
+}
+#app-container {
+  margin: 0 auto;
+  margin-top: 110px;
+  padding: 0 20px;
+  width: 90%;
+}
+.text-container {
+  padding: 20px 40px;
+}
